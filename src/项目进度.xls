@@ -1,0 +1,11 @@
+时间	功能	接口	进度	测试	备注
+4月1日	删除某一位用户	deleteone	完成		
+4月2日	修改密码	updatepassword	完成	js验证由bug	页面跳转
+	增加用户/用户注册	adduser	完成		
+4月4日	用户查询自己发布信息				
+	查询当前用户房屋	secHouseByuId			
+	查询当前用户零工	secWorkByuId			
+	改变房屋状态按钮（删除，改变状态）	updateHByState			
+	改变零工状态按钮（删除，改变状态）	updateWByState			
+	HouseController:				
+	用户添加一个零工实体	addwork	完成		页面跳转

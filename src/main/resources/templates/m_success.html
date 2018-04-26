@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>模板</title>
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css4/pricing.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script><!--js/-->
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+    <style>
+        .left-m {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            display: block;
+            background-color: RGB(200, 200, 200);
+            height: auto;
+            margin-top: -10px;
+        }
+
+        .td-left-1 {
+            margin: 4px;
+            background-color: RGB(255, 255, 255);
+            border: solid 2px black;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            display: block;
+            margin-top: 20px;
+
+        }
+
+        .td-left-2 {
+            color: black;
+            background-color: RGB(255, 255, 255);
+            border: solid 1px black;
+            border-radius: 15px;
+            font-size: 18px;
+            margin: 3px;
+            display: block;
+        }
+
+        .input-2 {
+            margin-left: 30px;
+        }
+
+        .intp {
+            width: 160px;
+            border-radius: 5px;
+        }
+
+        .btn-1 {
+            float: right;
+            margin-right: 50px;
+            color: white;
+            background: #4cae4c;
+            width: 70px;
+            height: 33px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div th:include="/m_model :: #m-pagetop"  ></div>
+
+<div class="row" style="text-align: center">
+    <!--左边操作栏-->
+    <div th:include="/m_index :: #m-pageleft" class="col-2 left-m"></div>
+    <!--  右边操作栏  核心内容展示-->
+
+
+    <div class="col-10 left-m" style="background-color: whitesmoke;height: 700px">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h2 style="margin-top: 20%;text-align: center">success</h2>
+                <p th:text="${msg}"></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:include="/m_index :: #m-pagefoot"></div>
+</body>
+</html>

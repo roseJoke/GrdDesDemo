@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>微中介服务管理系统主页</title>
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css4/pricing.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script><!--js/-->
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+    <style>
+        .left-m {
+            width: auto;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            display: block;
+            background-color: RGB(200, 200, 200);
+            height: auto;
+            margin-top: -10px;
+        }
+
+        .td-left-1 {
+            margin: 4px;
+            background-color: RGB(255, 255, 255);
+            border: solid 2px black;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            display: block;
+            margin-top: 20px;
+
+        }
+
+        .td-left-2 {
+            color: black;
+            background-color: RGB(255, 255, 255);
+            border: solid 1px black;
+            border-radius: 15px;
+            font-size: 18px;
+            margin: 3px;
+            display: block;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="m-pagetop">
+    <nav class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3"
+         style="background-color: #1b1e21">
+        <a class="py-4" style=" color:white;margin-top: 5px" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="d-block mx-auto">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+            </svg>
+        </a>
+        <h5 class="my-0 mr-md-auto font-weight-normal" style="margin-left: 15px;  color: white; font-size: 25px">
+            微中介管理系统</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+        </nav>
+
+        <li class="py-2 d-none d-md-inline-block dropdown"> <!-- th:if="${session.user!=null}"-->
+            <a class="nav-link dropdown-toggle" style="margin-top: -5px;color:white" href="http://example.com"
+               id="dropdown03"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:inline="text">
+                欢迎您，[[${session.user.userName}]]
+                <span class="caret"></span></a><!--[[${session.user.userName}]]-->
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item " href="/uppassword">修改密码</a>
+                <a class="dropdown-item" href="/logout">退出登录</a>
+            </div>
+        </li>
+        <!-- <a class="btn btn-outline-primary" href="#">Sign up</a>-->
+    </nav>
+</div>
+
+<div class="row" style="text-align: center">
+
+    <!--左边操作栏-->
+
+        <div id="m-pageleft" class="col-2 left-m">
+            <div>
+                <a class="td-left-1 dropdown-item" data-toggle="collapse" data-target="#demo">用户管理</a>
+                <div id="demo" class="collapse">
+                    <a class="td-left-2 dropdown-item" href="/m_adduser">添加用户</a>
+                    <a class="td-left-2 dropdown-item" href="/selectUserByElements?pageNum=1">用户列表</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="td-left-1 dropdown-item" data-toggle="collapse" data-target="#demo1">房源管理</a>
+                <div id="demo1" class="collapse">
+                    <a class="td-left-2 dropdown-item" href="/selectHouseByelments?pageNum=1&pageSize=8">房源列表</a>
+
+                    <a class="td-left-2 dropdown-item" href="#">其他</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="td-left-1 dropdown-item" data-toggle="collapse" data-target="#demo2">零工管理</a>
+                <div id="demo2" class="collapse">
+                    <a class="td-left-2 dropdown-item" href="/selectWorkSelective?pageNum=1">零工列表</a>
+                    <a class="dropdown-divider" href=""></a>
+
+                    <a class="td-left-2 dropdown-item" href="/deleteAllStatefalse">清除过期零工</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="td-left-1 dropdown-item" data-toggle="collapse" data-target="#demo3">其他</a>
+                <div id="demo3" class="collapse">
+                    <a class="td-left-2 dropdown-item" href="#">me撒子咧</a>
+
+                </div>
+            </div>
+        </div>
+
+    <!--  右边操作栏  核心内容展示-->
+    <div class="col-10 left-m" style="background-color: whitesmoke;height: 700px">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h2 style="margin-top: 20%;text-align: center">Welcome Admin。</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- 页脚 -->
+<footer id="m-pagefoot" class="container py-5  foots">
+    <div class="row">
+        <div class="col-12 col-md row  container-fluid">
+            <div class="col-5"></div>
+            <div class="col-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="d-block mb-2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                    <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                    <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                    <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                    <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                    <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                </svg>
+                <small class="d-block mb-3 text-muted">&copy;2018/3-5</small>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+</body>
+
+</html>
+
+
+

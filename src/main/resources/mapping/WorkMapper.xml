@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grddes.mapper.WorkMapper">
+    <resultMap id="BaseResultMap" type="com.grddes.model.Work">
+        <id column="w_id" property="wId" jdbcType="INTEGER"/>
+        <result column="w_name" property="wName" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="descripe" property="descripe" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="BIT"/>
+        <result column="u_id" property="uId" jdbcType="INTEGER"/>
+        <result column="releasetime" property="releasetime" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    w_id, w_name, price, phone, descripe, address, state, u_id, releasetime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from work
+        where w_id = #{wId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from work
+    where w_id = #{wId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.grddes.model.Work">
+    insert into work (w_id, w_name, price, 
+      phone, descripe, address, 
+      state, u_id, releasetime
+      )
+    values (#{wId,jdbcType=INTEGER}, #{wName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{phone,jdbcType=VARCHAR}, #{descripe,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{state,jdbcType=BIT}, #{uId,jdbcType=INTEGER}, #{releasetime,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.grddes.model.Work">
+        insert into work
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wId != null">
+                w_id,
+            </if>
+            <if test="wName != null">
+                w_name,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="descripe != null">
+                descripe,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="uId != null">
+                u_id,
+            </if>
+            <if test="releasetime != null">
+                releasetime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wId != null">
+                #{wId,jdbcType=INTEGER},
+            </if>
+            <if test="wName != null">
+                #{wName,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="descripe != null">
+                #{descripe,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=BIT},
+            </if>
+            <if test="uId != null">
+                #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="releasetime != null">
+                #{releasetime,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.grddes.model.Work">
+        update work
+        <set>
+            <if test="wName != null">
+                w_name = #{wName,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="descripe != null">
+                descripe = #{descripe,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=BIT},
+            </if>
+            <if test="uId != null">
+                u_id = #{uId,jdbcType=INTEGER},
+            </if>
+            <if test="releasetime != null">
+                releasetime = #{releasetime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where w_id = #{wId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.grddes.model.Work">
+    update work
+    set w_name = #{wName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      phone = #{phone,jdbcType=VARCHAR},
+      descripe = #{descripe,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      state = #{state,jdbcType=BIT},
+      u_id = #{uId,jdbcType=INTEGER},
+      releasetime = #{releasetime,jdbcType=VARCHAR}
+    where w_id = #{wId,jdbcType=INTEGER}
+  </update>
+
+    <!--deleteByUserId-->
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from work
+     where u_id=#{userid,jdbcType=INTEGER}
+  </delete>
+
+    <!--selectWorkByWorkId-->
+    <select id="selectWorkByWorkId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT w_name,price,phone,descripe,address,state,releasetime
+    from work
+    where w_id=#{workid,jdbcType=INTEGER}
+  </select>
+
+    <!--selectWorkSelective     动态查询work-->
+    <select id="selectWorkSelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work
+        where 1=1
+        <if test="work.address!=null and work.wName!=null">
+            and address like CONCAT('%', #{work.address}, '%')
+            and w_name like CONCAT('%', #{work.wName}, '%')
+        </if>
+        <if test="work.address==null and work.wName!=null">
+            and w_name like CONCAT('%', #{work.wName}, '%')
+        </if>
+        <if test="work.address!=null and work.wName==null">
+            and address like CONCAT('%', #{work.address}, '%')
+        </if>
+    </select>
+
+
+    <!--selectByUser_Id-->
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work
+        where u_id=#{userid,jdbcType=INTEGER}
+    </select>
+
+    <!--backmaxId-->
+    <select id="backmaxId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    max(w_id)
+    from work
+  </select>
+
+    <!--deleteAllStatefalse-->
+    <delete id="deleteAllStatefalse">
+        delete from work
+        where state=false
+    </delete>
+
+    <!--changeStateByworkid-->
+    <update id="changeStateByworkid">
+        update work set state=#{state}
+        where w_id=#{workid,jdbcType=INTEGER}
+    </update>
+
+    <!--ListAllHouses-->
+    <select id="ListAllHouses" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from work
+    </select>
+
+
+
+</mapper>
+

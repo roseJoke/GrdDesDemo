@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>添加零工信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script>
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+
+    <style>
+        .btn-default{
+            width:50%;
+            background-color: #9FB6CD;
+        }
+        .option-n{
+            border-radius:5px;
+        }
+    </style>
+
+</head>
+<body>
+<div th:include="/pagetop :: #hello "></div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3>
+                添加零工信息
+            </h3>
+            <p></p><p></p>
+            <form role="form"  action="/addwork" method="POST">
+                <div class="form-group">
+                    I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;:<input class="form-control" name="wId" type="text" th:value="${id}"/>
+                </div>
+                <div class="form-group">
+                雇&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主&nbsp;:<input class="form-control" name="wName" type="text" th:value="${session.user.getUserName()}" />
+                </div>
+                <div class="form-group">
+                    薪&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;酬&nbsp;:<input class="form-control" name="price" type="text" />
+                </div>
+                <div class="form-group">
+                    联系电话&nbsp;:<input class="form-control" name="phone" type="text" />
+                </div>
+                <div class="form-group">
+                    零工概述&nbsp;:<input class="form-control" name="descripe" type="text" />
+                </div>
+                <div class="form-group">
+                   地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:<input id="address"  name="address" class="form-control" data-toggle="collapse" data-target="#zzz" />
+                    <div id="zzz" class="collapse">
+
+                            <div class="from-control col-md-12 column form-inline">
+                                <select class="option-n" id="1">
+                                </select>
+                                <select class="option-n" id="2">
+                                </select>
+                                <select class="option-n" id="3">
+                                </select>
+                                <select class="option-n" id="4">
+                                </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <center><button class="btn btn-default" type="submit">添&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加</button></center>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+ <script>
+ /* $.ajax({url:"http://localhost:8088/map/shen",success:function(result){
+      $.each( result, function(index, value){
+          $("#1").append("<option >"+value+"</option>");
+      } );
+  }});*/
+
+ $.ajax({url:"http://localhost:8088/map/shen",success:function(result){
+     $.each( result, function(index, value){
+         $("#1").append("<option >"+value+"</option>");
+     } );
+ }});
+ $("#zzz select").change(function () {
+     var name = $(this).val();
+     var sel = this;
+     var next = $(sel).next();
+     $("#address").val($("#address").val()+name);
+     $.ajax({url:"/map/sele?name="+name,success:function(result){
+         next.empty();
+         $.each( result, function(index, value){
+             next.append("<option >"+value+"</option>");
+         } );
+     }});
+ });
+</script>
+
+</body>
+</html>

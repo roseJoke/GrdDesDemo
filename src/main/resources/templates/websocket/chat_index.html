@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket通信</title>
+    <script src="js4/sockjs.min.js"></script>
+    <script src="js4/jquery-3.3.1.min.js"></script>
+    <script src="js4/stomp.min.js"></script>
+</head>
+<body>
+哈哈哈
+</body>
+<script>
+    var ws=new WebSocket("ws://127.0.0.1:8088/chat");
+    ws.onopen=function () {
+        ws.send("hello,this im indexpage");
+    }
+</script>
+</html>

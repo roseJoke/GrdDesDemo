@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>查找零工</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script>
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+
+
+
+
+    <title>查询房屋信息</title>
+    <style>
+        .descripe{
+            width: 30%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .intp{
+            width: 160px;
+            border-radius:5px;
+        }
+        .btn-1{
+            float: right;
+            margin-right: 50px;
+            color: white;
+            background: #4cae4c;
+            width: 70px;
+            height: 33px;
+        }
+        .input-2{
+            margin-left: 30px;
+        }
+        .table-bordered{
+            border-radius:5px;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div th:include="/pagetop :: #hello"></div>
+<div class="container">
+
+    <section class="jumbotron text-center" style="background-color: white">
+        <form  id="elements_select" action="/selectWorkSelective" method="post">
+        <div class="container-fluid" >
+
+            <div class="row clearfix form-inline" style="float: right">
+
+                <div class="input-2  col-xs-3">
+                    按地址查找：<input class="intp" type="text" name="address"/>
+                </div>
+                <div class="input-2 col-xs-3">
+                    <button class="btn btn-1"  onclick="queryDeviceRecords(1)">搜索</button>
+                </div>
+
+            </div>
+
+            <p></p>
+
+        </div>
+        </form>
+    </section>
+
+    <!--/*@thymesVar id="worklist" type="List"*/-->
+    <div th:each="work : ${worklist}">
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <td> <!--/*@thymesVar id="work" type="com.grddes.model.Work"*/-->
+            <a  class="" data-toggle="collapse" th:attr="data-target=${'#'+work.wId}"  th:text="${work.wName}+' 的零工'"></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:id="${work.wId}" class="collapse">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th >雇主</th>
+                <th >价格（￥/h）</th>
+                <th>联系电话</th>
+                <th>零工描述</th>
+                <th>地址</th>
+                <th>发布时间</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${work.wName}"></td>
+                <td th:text="${work.price}"></td>
+                <td th:text="${work.phone}"></td>
+                <td th:text="${work.descripe}"></td>
+                <td th:text="${work.address}"></td>
+                <td th:text="${work.releasetime}"></td>
+                <td th:text="${work.state}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+
+
+</div>
+
+<div class="" style="margin-left: 30%">
+    <!--分页-->
+    <ul class="pag-2 pagination pagination-lg">
+        <li>共<a class="pag-1" th:text="${pagehelper.total}"></a>条记录,当前页为第<i class="pag-1" th:text="${pagehelper.pageNum}"></i>页</li>
+        <li><a class="pag-1" href="#"></a></li>
+        <li><a class="pag-1" href="#"></a></li>
+
+        <li th:if="${pagehelper.hasPreviousPage==true}">
+            <a  class="pag-1"  th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage)+');'}">上一页</a>
+        </li>
+
+
+        <li th:each="i: ${pagehelper.navigatepageNums}">
+            <i class="pag-1" th:text="${i}" th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage)+');'}">ha</i>
+        </li>
+
+        <li th:if="${pagehelper.hasNextPage==true}">
+            <a  class="pag-1" th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage+2)+');'}">下一页</a>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        function queryDeviceRecords(pageNum) {
+
+            var tmpInput=$("<input type='text' name='pageNum' value='"+pageNum+"' hidden='hidden'/>");
+            $("#elements_select").append(tmpInput);
+            console.log($("#elements_select").serialize());
+            $("#elements_select").submit();
+
+        }
+    </script>
+
+</div>
+<footer class="container py-5">
+    <div class="row">
+        <div class="col-12 col-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mb-2"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+            <small class="d-block mb-3 text-muted">&copy;2018/3-5</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>项目模块</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">房屋模块</a></li>
+                <li><a class="text-muted" href="#">零工模块</a></li>
+                <li><a class="text-muted" href="#">更多设计</a></li>
+
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>使用技术</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">BootStrap</a></li>
+                <li><a class="text-muted" href="#">Java Script</a></li>
+                <li><a class="text-muted" href="#">Spring Boot</a></li>
+                <li><a class="text-muted" href="#">Mybatis</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>源码解析</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">House Resources</a></li>
+                <li><a class="text-muted" href="#">Work Resources</a></li>
+                <li><a class="text-muted" href="#">User Resources</a></li>
+                <li><a class="text-muted" href="#">Others</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>关于我们</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">开发团队</a></li>
+                <li><a class="text-muted" href="#">关于</a></li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</footer>
+</body>
+</html>

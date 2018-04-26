@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/bootstrap.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <center>用户名:</center>
+        </td>
+        <td><input name="name"></td>
+    </tr>
+    <tr>
+        <td>
+            <center>密码:</center>
+        </td>
+        <td><input type="password" name="name"></td>
+    </tr>
+    <tr>
+        <td rowspan="2"><input type="submit" value="登录"></td>
+    </tr>
+</table>
+<div id="m">
+    <select id="1">
+        <option>省</option>
+        <option>陕西省</option>
+    </select>
+    <select id="2">
+        <option>市</option>
+    </select>
+    <select id="3">
+        <option>区</option>
+    </select>
+    <select id="4">
+        <option>街道</option>
+    </select>
+
+    <script>
+        $.ajax({url:"http://localhost:8088/map/sele?name=西安市",success:function(result){
+                $.each( result, function(index, value){
+                    $("#m #1").append("<option >"+value+"</option>");
+                } );
+            }});
+
+        $("#m select").change(function () {
+            var name = $(this).val();
+            var sel = this;
+            var next = $(sel).next();
+            $.ajax({url:"/map/sele?name="+name,success:function(result){
+                    next.empty();
+                    $.each( result, function(index, value){
+                        next.append("<option >"+value+"</option>");
+                    } );
+                }});
+        });
+
+    </script>
+</div>
+
+
+<!--网站底部-->
+<div id="footer" class="container">
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="navbar-inner navbar-content-center">
+            <p class="text-muted credit" style="padding: 10px;">
+
+            </p>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

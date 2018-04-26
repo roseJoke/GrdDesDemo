@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传</title>
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <script src="js4/jquery.min.js"></script>
+    <script src="js4/popper.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+
+</head>
+<body>
+<form role="form" action="/uploadfile" enctype="multipart/form-data" method="post">
+        <input id="photo" type="file"  name="files[]" multiple="true" accept="image/*"/>
+    <center><button class="btn btn-default" type="submit">添&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加</button></center>
+</form>
+</body>
+</html>

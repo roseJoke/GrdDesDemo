@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>添加房屋信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script>
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+
+
+    <style>
+        .btn-default{
+            width:50%;
+            background-color: #9FB6CD;
+        }
+    </style>
+
+</head>
+<body>
+<div th:include="/pagetop :: #hello "></div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3>
+                填写房屋信息
+            </h3>
+            <p></p><p></p>
+
+            <form role="form" action="/addhouse" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="id">I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;:</label><input class="form-control" id="id" name="hId" type="text" th:value="${id}"/>
+                </div>
+                <div class="form-group">
+                <label for="name">房&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名&nbsp;:</label><input class="form-control" id="name" name="hostname" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="price">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格&nbsp;:</label><input class="form-control" id="price" name="price" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="area">面&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;积&nbsp;:</label><input class="form-control" id="area"  name="area" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="phone">房东电话&nbsp;:</label><input class="form-control" id="phone" name="phone" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="descripe">房子概述&nbsp;:</label><input class="form-control" id="descripe"  name="descripe" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="address">位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;置&nbsp;:</label><input class="form-control" id="address"  name="address" type="text" />
+                </div>
+                <!--<div class="form-group">
+                    <label for="state ">房屋状态&nbsp;:</label><input class="form-control" id="state "  type="text" />
+                </div>-->
+                <div class="form-group">
+                    <label for="photo">房屋图片&nbsp;:</label><input id="photo" type="file"  name="files[]" multiple="true" accept="image/*"/>
+                </div>
+                <center><button class="btn btn-default" type="submit">添&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加</button></center>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+    .panel-group1{
+        margin-bottom: 1px;
+    }
+</style>
+
+
+
+<input id="addresss" class="form-control collapsed" href="#panel-element-365877" data-toggle="collapse" data-parent="#panel-748921"/>
+<div class="panel-collapse collapse" id="panel-element-365877">
+    <div class="panel-body">
+        <div class=" from-control col-md-12 column">
+            <select id="1">
+
+
+            </select>
+            <select id="2">
+                <option>西安市</option>
+            </select>
+            <select id="3">
+                <option>凤凰镇</option>
+            </select>
+            <select id="4">
+                <option>凤凰街道</option>
+            </select>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+   /* $.ajax({url:"http://localhost:8088/map/shen",success:function(result){
+        $.each( result, function(index, value){
+            $("#1").append("<option >"+value+"</option>");
+        } );
+    }});*/
+   $.ajax({url:"http://localhost:8088/map/shen",success:function(result){
+       $.each( result, function(index, value){
+           $("#1").append("<option >"+value+"</option>");
+       } );
+   }});
+   $("#panel-element-365877 select").change(function () {
+       var name = $(this).val();
+       var sel = this;
+       var next = $(sel).next();
+       $("#addresss").val($("#addresss").val()+name);
+       $.ajax({url:"/map/sele?name="+name,success:function(result){
+           next.empty();
+           $.each( result, function(index, value){
+               next.append("<option >"+value+"</option>");
+           } );
+       }});
+   });
+</script>
+</body>
+</html>

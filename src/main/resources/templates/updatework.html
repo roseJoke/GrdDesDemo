@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>添加零工信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+
+
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <script src="js4/jquery.min.js"></script>
+    <script src="js4/popper.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+
+    <style>
+        .btn-default{
+            width:50%;
+            background-color: #9FB6CD;
+        }
+    </style>
+
+</head>
+<body>
+<div th:include="/pagetop :: #hello "></div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3>
+                添加零工信息
+            </h3>
+            <p></p><p></p>
+            <form role="form">
+                <div class="form-group">
+                    <label for="id">I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;:</label><input class="form-control" id="id" type="text" />
+                </div>
+                <div class="form-group">
+                <label for="name">雇&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主&nbsp;:</label><input class="form-control" id="name" type="text" th:value="${session.user.username}" />
+                </div>
+                <div class="form-group">
+                    <label for="money">薪&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;酬&nbsp;:</label><input class="form-control" id="money" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="moiblephone">房东电话&nbsp;:</label><input class="form-control" id="moiblephone" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="descripe">零工概述&nbsp;:</label><input class="form-control" id="descripe" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="address">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;:</label><input class="form-control" id="address" type="text" />
+                </div>
+                <div class="form-group">
+                    <label for="state ">零工状态&nbsp;:</label><input class="form-control" id="state " type="text" />
+                </div>
+                <center><button class="btn btn-default" type="submit">添&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加</button></center>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div th:include="/pageFooter :: #pgfooter "></div>
+</body>
+</html>

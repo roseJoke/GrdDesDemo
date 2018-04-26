@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grddes.mapper.PictureMapper" >
+  <resultMap id="BaseResultMap" type="com.grddes.model.Picture" >
+    <id column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="p_url" property="pUrl" jdbcType="VARCHAR" />
+    <result column="h_id" property="hId" jdbcType="INTEGER" />
+
+  </resultMap>
+  <sql id="Base_Column_List" >
+    p_id, p_url, h_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from picture
+    where p_id = #{pId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByhId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from picture
+    where h_id = #{hId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryHid" parameterType="java.lang.Integer" >
+    delete from picture
+    where h_id = #{hId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picture
+    where p_id = #{pId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.grddes.model.Picture" >
+    insert into picture (p_id, p_url, h_id)
+    values (#{pId,jdbcType=INTEGER}, #{pUrl,jdbcType=VARCHAR}, #{hId,jdbcType=INTEGER}
+
+  </insert>
+  <insert id="insertSelective" parameterType="com.grddes.model.Picture" >
+    insert into picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="pUrl != null" >
+        p_url,
+      </if>
+      <if test="hId != null" >
+        h_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="pUrl != null" >
+        #{pUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hId != null" >
+        #{hId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.grddes.model.Picture" >
+    update picture
+    <set >
+      <if test="pUrl != null" >
+        p_url = #{pUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="hId != null" >
+        h_id = #{hId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.grddes.model.Picture" >
+    update picture
+    set p_url = #{pUrl,jdbcType=VARCHAR},
+      h_id = #{hId,jdbcType=INTEGER},
+    where p_id = #{pId,jdbcType=INTEGER}
+  </update>
+  <!--backMaxid-->
+  <select id="backMaxid" resultType="java.lang.Integer">
+    select
+    max(p_id)
+    from picture
+
+  </select>
+
+<!--seletePicture-->
+<select id="seletePicture" resultMap="BaseResultMap">
+  SELECT
+  <include refid="Base_Column_List" />
+  from picture
+</select>
+</mapper>

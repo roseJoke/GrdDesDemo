@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.grddes.mapper.HouseMapper">
+    <resultMap id="BaseResultMap" type="com.grddes.model.House">
+        <id column="h_id" property="hId" jdbcType="INTEGER"/>
+        <result column="hostname" property="hostname" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="area" property="area" jdbcType="DOUBLE"/>
+        <result column="descripe" property="descripe" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="BIT"/>
+        <result column="u_id" property="uId" jdbcType="INTEGER"/>
+        <!--association  配置-->
+
+    </resultMap>
+    <sql id="Base_Column_List">
+    h_id, hostname, price, area, descripe, address, phone, state, u_id
+  </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        where h_id = #{hId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house
+    where h_id = #{hId,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.grddes.model.House">
+    insert into house (h_id, hostname, price, 
+      area, descripe, address, 
+      phone, state, u_id)
+    values (#{hId,jdbcType=INTEGER}, #{hostname,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, 
+      #{area,jdbcType=DOUBLE}, #{descripe,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, #{uId,jdbcType=INTEGER})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.grddes.model.House">
+        insert into house
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hId != null">
+                h_id,
+            </if>
+            <if test="hostname != null">
+                hostname,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="descripe != null">
+                descripe,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="uId != null">
+                u_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hId != null">
+                #{hId,jdbcType=INTEGER},
+            </if>
+            <if test="hostname != null">
+                #{hostname,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=DOUBLE},
+            </if>
+            <if test="descripe != null">
+                #{descripe,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=BIT},
+            </if>
+            <if test="uId != null">
+                #{uId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.grddes.model.House">
+        update house
+        <set>
+            <if test="hostname != null">
+                hostname = #{hostname,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=DOUBLE},
+            </if>
+            <if test="descripe != null">
+                descripe = #{descripe,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=BIT},
+            </if>
+            <if test="uId != null">
+                u_id = #{uId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where h_id = #{hId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.grddes.model.House">
+    update house
+    set hostname = #{hostname,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      area = #{area,jdbcType=DOUBLE},
+      descripe = #{descripe,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      state = #{state,jdbcType=BIT},
+      u_id = #{uId,jdbcType=INTEGER}
+    where h_id = #{hId,jdbcType=INTEGER}
+  </update>
+
+
+    <!-- 根据user_id 删除house -->
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from house
+    where u_id = #{userid,jdbcType=INTEGER}
+  </delete>
+
+    <!--backMaxId-->
+    <select id="backMaxId" resultType="java.lang.Integer">
+    select
+    max(h_id)
+    from house
+  </select>
+
+
+    <!--selectHousesByUserID-->
+    <select id="selectHousesByUserID" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        where u_id = #{userid,jdbcType=INTEGER}
+    </select>
+
+    <!--changeHouseState-->
+    <update id="changeHouseState">
+        update house
+            set state=#{state}
+        where h_id=#{hid,jdbcType=INTEGER}
+
+    </update>
+
+    <!--ListAllHouses-->
+    <select id="ListAllHouses" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        from house
+    </select>
+
+    <!--seleteByElements-->
+
+    <select id="seleteByElements" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from house
+        where 1=1
+
+        <if test ="hou.hostname!=null">
+            and hostname like CONCAT('%', #{hou.hostname}, '%')
+        </if>
+
+        <!--  part1-->
+        <if test="hou.area!=null and maxarea!=null">
+            and area &gt;= #{hou.area} and area &lt;= #{maxarea}
+            <if test="hou.price!=null and maxprice!=null">
+                and price &gt;= #{hou.price} and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice!=null">
+                and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice==null">
+                and price &gt;= #{hou.price}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice==null">
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+        </if>
+
+        <!--  part2-->
+        <if test="hou.area==null and maxarea!=null">
+            and area &lt;= #{maxarea}
+            <if test="hou.price!=null and maxprice!=null">
+                and price &gt;= #{hou.price} and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice!=null">
+                and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice==null">
+                and price &gt;= #{hou.price}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice==null">
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+        </if>
+
+        <!--  part3-->
+        <if test="hou.area!=null and maxarea==null">
+            and area &gt;= #{hou.area}
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice!=null">
+                and price &gt;= #{hou.price} and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice!=null">
+                and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice==null">
+                and price &gt;= #{hou.price}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice==null">
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+
+        </if>
+
+        <!--part4-->
+        <if test="hou.area==null and maxarea==null">
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice!=null">
+                and price &gt;= #{hou.price} and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice!=null">
+                and price &lt;= #{maxprice}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price!=null and maxprice==null">
+                and price &gt;= #{hou.price}
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+            <!--    oooooo    -->
+            <if test="hou.price==null and maxprice==null">
+                <if test="hou.address!=null">
+                    and address like CONCAT('%', #{hou.address}, '%')
+                </if>
+            </if>
+
+
+        </if>
+
+
+    </select>
+</mapper>

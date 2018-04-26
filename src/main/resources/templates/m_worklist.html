@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>模板</title>
+    <link rel="stylesheet" href="css4/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css4/pricing.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script><!--js/-->
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+    <style>
+        .left-m {
+            padding-top: 30px;
+            padding-bottom: 30px;
+            text-align: center;
+            display: block;
+            background-color: RGB(200, 200, 200);
+            height: auto;
+            margin-top: -10px;
+        }
+
+        .td-left-1 {
+            margin: 4px;
+            background-color: RGB(255, 255, 255);
+            border: solid 2px black;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            display: block;
+            margin-top: 20px;
+
+        }
+
+        .td-left-2 {
+            color: black;
+            background-color: RGB(255, 255, 255);
+            border: solid 1px black;
+            border-radius: 15px;
+            font-size: 18px;
+            margin: 3px;
+            display: block;
+        }
+
+        .input-2 {
+            margin-left: 30px;
+        }
+
+        .intp {
+            width: 160px;
+            border-radius: 5px;
+        }
+
+        .btn-1 {
+            float: right;
+            margin-right: 50px;
+            color: white;
+            background: #4cae4c;
+            width: 70px;
+            height: 33px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div th:include="/m_index :: #m-pagetop"></div>
+
+<div class="row" style="text-align: center">
+    <!--左边操作栏-->
+    <div th:include="/m_index :: #m-pageleft" class="col-2 left-m"></div>
+    <div class="container-fluid col-10" style="border: 5px;">
+
+        <table class="table table-striped col-10">
+            <thead>
+            <tr>
+                <th>零工ID</th>
+                <th>雇主</th>
+                <th>薪金</th>
+                <th>联系方式</th>
+                <th>描述</th>
+                <th>地址</th>
+                <th>状态</th>
+                <th>发布时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="work:${worklist}">
+                <td th:text="${work.wId}">4000</td>
+                <td th:text="${work.wName}">Rose</td>
+                <td th:text="${work.price}">125</td>
+                <td th:text="${work.phone}">125</td>
+                <td th:text="${work.descripe}">带个外卖</td>
+                <td th:text="${work.address}">唐都花园11室</td>
+                <td th:text="${work.state}">未受理</td>
+                <td th:text="${work.releasetime}">2018.02.23</td>
+
+                <td>
+
+                    <a th:href="${'/changeState?workid='+work.wId+'&state='+!work.state}"> <span class="badge badge-warning">修改</span></a>
+                    <a th:href="${'/deleteByWorkid?workid='+work.wId}" class="removeProvider"> <span class="badge badge-danger">删除</span></a>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <!--分页-->
+        <div class="" style="margin-left: 30%">
+            <ul class="pag-2 pagination pagination-lg">
+                <li>共<a class="pag-1" th:text="${pagehelper.total}"></a>条记录,当前页为第<i class="pag-1" th:text="${pagehelper.pageNum}"></i>页</li>
+                <li><a class="pag-1" href="#"></a></li>
+                <li><a class="pag-1" href="#"></a></li>
+
+                <li th:if="${pagehelper.hasPreviousPage==true}">
+                    <a  class="pag-1"  th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage)+');'}">上一页</a>
+                </li>
+
+
+                <li th:each="i: ${pagehelper.navigatepageNums}">
+                    <i class="pag-1" th:text="${i}" th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage)+');'}">ha</i>
+                </li>
+
+                <li th:if="${pagehelper.hasNextPage==true}">
+                    <a  class="pag-1" th:href="${'javascript:queryDeviceRecords('+(pagehelper.prePage+2)+');'}">下一页</a>
+                </li>
+            </ul>
+            <script type="text/javascript">
+                function queryDeviceRecords(pageNum) {
+
+                    var tmpInput=$("<input type='text' name='pageNum' value='"+pageNum+"' hidden='hidden'/>");
+                    $("#elements_select").append(tmpInput);
+                    console.log($("#elements_select").serialize());
+                    $("#elements_select").submit();
+
+                }
+            </script>
+
+        </div>
+    </div>
+</div>
+
+<div th:include="/m_index :: #m-pagefoot"></div>
+</body>
+</html>

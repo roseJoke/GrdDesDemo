@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>微中介服务系统主页</title>
+
+    <link rel="stylesheet" href="css4/bootstrap.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script><!--js/-->
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css4/product.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="site-header sticky-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" style="margin-top: 5px" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="d-block mx-auto">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+            </svg>
+        </a>
+        <a class="py-2 d-none d-md-inline-block" style="margin-top: 5px" href="#">微中介</a>
+        <a class="py-2 d-none d-md-inline-block" style="margin-top: 5px" href="#hh">房屋</a>
+        <a class="py-2 d-none d-md-inline-block" style="margin-top: 5px" href="#ww">零工</a>
+
+        <a class="py-2 d-none d-md-inline-block drop" style="margin-top: 5px" href="#">关于我们</a>
+
+        <li class="py-2 d-none d-md-inline-block dropdown" th:if="${session.user!=null}">
+            <a class="nav-link dropdown-toggle" style="margin-top: -5px" href="http://example.com" id="dropdown03"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:inline="text">
+                欢迎您，
+                [[${session.user.userName}]]<span class="caret"></span></a>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+                <a class="dropdown-item " href="/selectHousesByUserID?pageNum=1">我的房源</a>
+                <a class="dropdown-item " href="/selectByUserId?pageNum=1">我的零工</a>
+                <a class="dropdown-item " href="/uppassword">修改密码</a>
+                <a class="dropdown-item" href="/logout">退出登录</a>
+            </div>
+        </li>
+        <li class="py-2 d-none d-md-inline-block dropdown" style="margin-top: 5px" th:if="${session.user == null}"><a
+                href="/login">登录</a>
+        </li>
+
+
+    </div>
+</nav>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">微中介服务系统</h1>
+        <p class="lead font-weight-normal">The most important of living beauty.</p>
+        <a class="btn btn-outline-secondary" href="#">了解详情</a>
+    </div>
+    <div class="product-device box-shadow d-none d-md-block"></div>
+    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+</div>
+<a id="hh"></a>
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+            <!--        /sehouse                  -->
+            <a href="/adhouse" style="color: white;" class="display-5"><h2>发布房源</h2></a>
+
+            <p class="lead">第一手房源更实惠.</p>
+        </div>
+        <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <!--        /adhouse            -->
+            <a href="/selectHouseByelments?pageNum=1&pageSize=8" class="lg" style="color: black"><h2 class="display-5">
+                我要找房</h2></a>
+            <p class="lead">让找租远离中间商变得简捷起来.</p>
+        </div>
+        <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<a id="ww"></a>
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+    <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+        <div class="my-3 p-3">
+            <!--   /adwork      -->
+            <a href="/adwork" id="addwork" style="color: black"><h2 class="display-5">发布零工</h2></a>
+            <p class="lead">更多人为你服务的机会.</p>
+        </div>
+        <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+    <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+        <div class="my-3 py-3">
+            <!--       /sework       -->
+            <a href="/selectWorkSelective?pageNum=1" style="color: white"><h2 class="display-5">查找零工</h2></a>
+            <p class="lead">把闲暇时光变成零花钱.</p>
+        </div>
+        <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+    </div>
+</div>
+
+<footer class="container py-5">
+    <div class="row">
+        <div class="col-12 col-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="d-block mb-2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+            </svg>
+            <small class="d-block mb-3 text-muted">&copy;2018/3-5</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>项目模块</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">房屋模块</a></li>
+                <li><a class="text-muted" href="#">零工模块</a></li>
+                <li><a class="text-muted" href="#">更多设计</a></li>
+
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>使用技术</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">BootStrap</a></li>
+                <li><a class="text-muted" href="#">Java Script</a></li>
+                <li><a class="text-muted" href="#">Spring Boot</a></li>
+                <li><a class="text-muted" href="#">Mybatis</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>源码解析</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">House Resources</a></li>
+                <li><a class="text-muted" href="#">Work Resources</a></li>
+                <li><a class="text-muted" href="#">User Resources</a></li>
+                <li><a class="text-muted" href="#">Others</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>关于我们</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">开发团队</a></li>
+                <li><a class="text-muted" href="#">关于</a></li>
+
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

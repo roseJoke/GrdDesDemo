@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Checkout example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="css4/bootstrap.css"/>
+    <script src="js4/jquery-3.3.1.min.js"></script><!--js/-->
+    <script src="js4/popper.min.js"></script>
+    <script src="js4/bootstrap.min.js"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="css4/form-validation.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+
+        <h2>注册页面</h2>
+        <p class="lead" style="margin-left: 30px">欢迎你加入微中介。</p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8 order-md-1">
+          <form class="needs-validation" action="/adduser" >
+            <div class="mb-3">
+              <label for="id">ID</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="id"  name="id" th:value="data">
+                <div class="invalid-feedback" style="width: 100%;">
+                  Your username is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="username">用户名</label><h4 style="color: #f45125;font-size: 8px" th:text="${msg}"></h4>
+              <input type="text" class="form-control" id="username" name="username" >
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password1">密码</label>
+              <input type="password" class="form-control" id="password1" name="password1">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password2">重复密码</label>
+              <input type="text" class="form-control" id="password2">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">注册</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy;2018/4-5 </p>
+
+      </footer>
+    </div>
+
+<script>
+
+        $.get("/backid",function(data){
+            $("#id").val(data+1);
+        });
+
+</script>
+
+  </body>
+</html>
