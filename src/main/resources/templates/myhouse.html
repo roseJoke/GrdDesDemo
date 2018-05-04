@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+          <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
@@ -54,9 +54,9 @@
             <td th:text="${house.state}">未出租</td>
 
             <td>
-
-                <a th:href="${'/changeHouseState?hId='+house.hId+'&state='+!house.state}"> <span class="badge badge-info">更改状态</span></a>
-                <a th:href="${'/deleteHouseById?hId='+house.hId}" class="removeProvider"> <span
+               <!-- th:href="${'/changeHouseState?hId='+house.hId+'&state='+!house.state}"-->
+                <a id="updateState" > <span class="badge badge-info">更改状态</span></a>
+                <a id="deletepojo" th:href="${'/deleteHouseById?hId='+house.hId}" class="removeProvider"> <span
                         class="badge badge-danger">删除</span></a>
             </td>
         </tr>
@@ -92,6 +92,22 @@
                  $("#elements_select").submit();
 
              }
+
+
+
+            $("#updateState").click(function(){
+                var hh=1027;
+                var s=true;
+                alert("哈哈："+hh+"  "+s);
+                $.post("/changeHouseState",{
+                        hId:hh,
+                        state:s
+                }),function () {
+                    $.load("")
+                }
+
+
+            });
          </script>
      </div>
 

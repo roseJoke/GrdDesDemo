@@ -88,8 +88,8 @@
         where h_id = #{hId,jdbcType=INTEGER}
     </delete>
 
-    <!--selectByhId-->
-    <select id="selectByhId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <!--selectPicturesByhId-->
+    <select id="selectPicturesByhId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
         from picture

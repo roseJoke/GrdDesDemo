@@ -15,15 +15,9 @@ public interface PictureMapper {
 
     Picture selectByPrimaryKey(Integer pId);
 
-    List<Picture> selectByhId(Integer hId);
-
-    int updateByPrimaryKeySelective(Picture record);
-
     int updateByPrimaryKey(Picture record);
 
     int backMaxid();
 
-    void SavePic(Picture picture);
-
-    List<Picture> seletePicture();
+    List<Picture> selectPicturesByhId(int hId);
 }

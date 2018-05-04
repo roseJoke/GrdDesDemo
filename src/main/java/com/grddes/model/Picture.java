@@ -42,5 +42,12 @@ public class Picture {
         this.hId = hId;
     }
 
-
+    @Override
+    public String toString() {
+        return "Picture{" +
+                "pId=" + pId +
+                ", pUrl='" + pUrl + '\'' +
+                ", hId=" + hId +
+                '}';
+    }
 }

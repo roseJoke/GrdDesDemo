@@ -112,7 +112,7 @@ public class HouseController {
 
     /**
      * 根据hid查询某个实体
-     *
+     *  //无用 考虑业务是否删除
      * @param hid
      * @return
      */
@@ -151,11 +151,11 @@ public class HouseController {
             } else {
                 Page<?> page = PageHelper.startPage(pageNum, 8);
                 List<House> houselist = houseService.seleteByElements(house, maxarea, maxprice);
-                List<Picture> pictureList = pictureService.seletePicture();
+               /* List<Picture> pictureList = pictureService.seletePicture();   //得分离  */
                 PageInfo<?> pagehelper = page.toPageInfo();
-                System.out.println(pictureList.toString());
+              /*  System.out.println(pictureList.toString());*/
                 mv = new ModelAndView("seclecthouse");
-                mv.addObject("pictureList", pictureList);
+              /*  mv.addObject("pictureList", pictureList);*/
                 mv.addObject("houselist", houselist);
                 mv.addObject("pagehelper", pagehelper);
             }
@@ -220,7 +220,7 @@ public class HouseController {
     /**
      * 根据hid改变房屋状态
      *
-     * @param hid
+     *
      * @return
      */
     @RequestMapping(value = "/changeHouseState")

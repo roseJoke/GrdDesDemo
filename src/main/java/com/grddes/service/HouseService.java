@@ -42,11 +42,11 @@ public class HouseService {
 
     }
 
-    public int deleteHouse(int id) {
-       if(pictureService.seletePictureByhId(id)){
-             pictureService.deleteByhId(id);
+    public int deleteHouse(int hId) {
+       if(pictureService.PictureExist(hId)){
+             pictureService.deleteByhId(hId);
        }
-       return houseMapper.deleteByPrimaryKey(id);
+       return houseMapper.deleteByPrimaryKey(hId);
 
     }
 
